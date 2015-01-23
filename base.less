@@ -1,0 +1,257 @@
+@import url('lib/aal.less');
+@import url('lib/mixins.less');
+@import url('lib/responsive-media.less');
+@import url('lib/helpers.less');
+@import url('lib/grid.less');
+@import url('variables.less');
+@import url('defaults.less');
+
+// For the sticky footer.
+// Will need to be mixed-in your html tag.
+@import url('sticky-footer.less');
+@import url('landing.less');
+
+// FIXME : Add a mixin-only grid system.
+// FIXME : Component-ize everything under here.
+
+///////////////////////////////////////////////////////////////////////////////
+// Layout specifics
+///////////////////////////////////////////////////////////////////////////////
+
+// Holds the whole page.
+#container {
+	position:relative;
+	width:100%;
+	.center-block();
+}
+
+//////////////////////////////////
+// Default navigation behaviour //
+//////////////////////////////////
+nav {
+	ul {
+		display:block;
+		list-style-type:none;
+		list-style-position:inside;
+		margin-left:6px;
+		margin-top:-14px;
+
+		li {
+			display:inline;
+		}
+		li a:link, // For specificity
+		li a {
+			display:block;
+			float:left;
+			padding:0 6px;
+			text-decoration:none;
+			margin-left:6px;
+		}
+	}
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Header styles
+///////////////////////////////////////////////////////////////////////////////
+
+header {
+	color:@header-fg;
+	background:@header-bg;
+	position:relative;
+	display:block;
+	width: 100%;
+}
+
+// Logo specifics
+#logo {
+	margin:0;
+	padding:0;
+	padding-bottom:24px;
+	display:block;
+	height:auto;
+	text-align: left;
+	.center-page();
+
+	h1 {
+		margin:0;
+		padding:0 @page-margins;
+	}
+	// For the landing page, mainly.
+	&.big h1 {
+		margin:0;
+		margin-bottom:20px;
+	}
+	// Responsive logo
+	img {
+		max-width:100%;
+		height:auto;
+	}
+}
+
+// Top super-menu, mainly used for YARD
+header #menutop {
+	.center-page();
+	text-align: right;
+	display:block;
+	position: relative;
+
+	a, a:visited, a:hover {
+		color:@menutop-fg;
+		background:@menutop-bg;
+		text-decoration: none;
+		display:inline-block;
+		padding:3px;
+		.border-radius(2px);
+	}
+	a.active, a:hover {
+		color: @menutop-active-fg;
+		background-color: @menutop-active-bg;
+	}
+}
+
+// Navigation specifics
+// See how we could split this into more specific components
+header nav {
+	height:45px;
+	font-family: arial, serif;
+	font-size:24px;
+	background-color: @menu-bg;
+
+	ul {
+		display:block;
+		height:45px;
+		.center-page()
+	}
+	ul,
+	ul li a:link {
+		margin:0;
+		padding:0;
+		margin:auto;
+		background-color: @menu-bg;
+		height:30px;
+	}
+	ul li a:link {
+		padding-top:15px;
+		padding-left:10px;
+		padding-right:10px;
+	}
+
+	// Appearance
+	ul li a:visited,
+	ul li a:link {
+		color: @menu-fg;
+	}
+	ul li a:hover,
+	ul li.active a {
+		text-shadow:@menu-shadow 1px 1px 4px;
+		background-color: @menu-active-bg;
+		color: @menu-active-fg;
+	}
+	// For smaller devices
+	@media only screen and (max-width: @width-phone) {
+		&,
+		ul {
+			height:auto;
+			margin:auto;
+			text-align:center;
+			position:static;
+		}
+		ul li,
+		ul li a:link {
+			display:block;
+			position:static;
+			margin: 0;
+			width:100%;
+			padding-left:0;
+			padding-right:0;
+			margin:0;
+			float: none;
+		}
+	}
+}
+
+
+#breadcrumbs {
+	padding:0 21px;
+	padding-top: 5px;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Footer
+///////////////////////////////////////////////////////////////////////////////
+
+// The footer itself is full page-width
+// This allows styling the gutters.
+footer {
+	font-family:;
+	font-size:14px;
+	text-align:left;
+
+	clear:both;
+
+	width:100%;
+	margin:0;
+	padding:0;
+
+	#copyright {
+		.center-page();
+		text-align:center;
+	}
+	* {
+		color: @footer-fg;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Contents and main section
+///////////////////////////////////////////////////////////////////////////////
+
+// Holder holds the contents of the page, and centers it.
+#holder {
+	.center-page();
+	padding-bottom: 4em;
+}
+
+// Sets the line-height for the contents
+body #content {
+	line-height:1.7em;
+	margin: @page-margins;
+	padding-top:1em;
+}
+#content p {
+	max-width:42em;
+	width:auto;
+}
+
+// pre will not make page scroll.
+#content pre {
+	max-width:100%;
+	overflow:scroll;
+	// Too spacey otherwise
+	line-height: 1.5em;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Media queries
+///////////////////////////////////////////////////////////////////////////////
+
+// Contents touch sides
+@media only screen and (max-width: @page-width) {
+	// Conserve space!
+	#content p {
+		margin-left: 0.4em;
+		margin-right: 0.4em;
+	}
+}
+
+@media only screen and (max-width: @width-phone) {
+	// Some breathing room!
+	body #content {
+		padding-top: 1em;
+	}
+}
+
+

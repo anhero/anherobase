@@ -1,0 +1,115 @@
+// body.main is the landing page.
+// This is used to change the colors used.
+// This also sets the custom layout for custom elements.
+
+// Defaults
+@landing-fg: #efefef;
+@landing-bg: #111111;
+@landing-menu-bg: lighten(@landing-bg, 6%);
+@landing-menu-fg: @landing-fg;
+@landing-menu-active: lighten(@landing-menu-bg, 6%);
+@landing-menu-active: @highlight-main;
+@landing-menu-width: 340px;
+@landing-menu-padding: 10px;
+@landing-menu-margin: 10px;
+
+
+.landing-page() {
+	background-color: @landing-bg;
+	color: @landing-fg;
+
+	// YARD fixes...
+	#filecontents code, #filecontents pre {
+		background: transparent;
+		border: none;
+	}
+
+	// We don't want those sensible default widths
+	#content p { width: auto; }
+
+	#content p.explanation {
+		text-align:center;
+		font-size:1.2em;
+		margin:2em;
+		padding-bottom:2em;
+		max-width: 100%;
+		width: auto;
+	}
+	@media only screen and (max-width: @contents-width) {
+		#content p.explanation { margin: 0.4em; }
+	}
+
+	// Landing menu
+	// FIXME : Component-ize grid menu!
+	// Positionning
+	#content .landingmenu {
+		text-align:center;
+		a {
+			padding:@landing-menu-padding;
+			width: @landing-menu-width - 2*(@landing-menu-padding);
+		}
+		a, .smaller {
+			display:block;
+			margin:@landing-menu-margin auto;
+		}
+	}
+
+	// Appearance
+	#content .landingmenu {
+		a,
+		a:link, a:hover, a:active, a:visited {
+			font-size:1.4em;
+			text-transform: uppercase;
+			text-align:center;
+			font-weight:bold;
+			color: @landing-menu-fg;
+			text-decoration:none;
+			background: @landing-menu-bg;
+			.border-radius(6px);
+		}
+		
+		// The 'main' call to action element
+		a.install,
+		// Hovered and active elements have the same style.
+		a:hover, a:active {
+			background-color:@landing-menu-active;
+		}
+	}
+
+	#content .landingmenu .smaller {
+		width: @landing-menu-width + @landing-menu-margin;
+		padding-left:@landing-menu-margin;
+	}
+	#content .landingmenu .smaller a{
+		margin:0;
+		margin-right: @landing-menu-margin;
+		width: (@landing-menu-width / 2) - (2*@landing-menu-padding) - @landing-menu-margin/2 ;
+		display: inline-block;
+	}
+
+	// Image positioning inside the menu items.
+	#content .landingmenu img {
+		vertical-align: baseline;
+		display:inline-block;
+		position:relative;
+		// Seems the middle of the image is mis-aligned.
+		top:1px;
+	}
+
+	// Some finaggling for responsiveness
+	@media only screen and (max-width: @width-phone) {
+		#content .landingmenu .smaller {
+			margin:0;
+			padding:0;
+		}
+		#content .landingmenu .smaller a,
+		#content .landingmenu .smaller,
+		#content .landingmenu a {
+			width: auto;
+			display:block;
+			margin:0;
+			margin-bottom: @landing-menu-margin/2;
+		}
+	}
+}
+

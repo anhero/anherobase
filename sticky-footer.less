@@ -1,0 +1,21 @@
+// Assumes this structure :
+//   body
+//     #container
+//       [...]
+//       #holder
+//         [... contents ...]
+//     footer
+//
+// You can change the default selectors.
+
+// Use this mixin on the html selector.
+.sticky-footer(@footer: footer, @container: ~"#container", @holder: ~"#holder") {
+	&, body { height: 100%; }
+	@{footer} {
+		position: absolute;
+		left:0; bottom:0;
+		height: @footer-height;
+	}
+	@{container} { min-height:100%; }
+	@{holder}    { margin-bottom: @footer-height; }
+}
