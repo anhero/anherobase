@@ -29,23 +29,25 @@
 // Default navigation behaviour //
 //////////////////////////////////
 nav {
+	// Makes the menu not wrap down on smaller resolutions,
+	// though it will hide the element partially. The elements
+	// are inline-block for horizontal alignments.
+	// Make sure to add media queries to fix the menus.
+	white-space: nowrap;
 	ul {
 		display:block;
 		list-style-type:none;
 		list-style-position:inside;
-		margin-left:6px;
-		margin-top:-14px;
 
 		li {
-			display:inline;
+			display:inline-block;
+			margin:0;
 		}
 		li a:link, // For specificity
 		li a {
 			display:block;
-			float:left;
-			padding:0 6px;
 			text-decoration:none;
-			margin-left:6px;
+			text-decoration:none !important; //IE8 issue
 		}
 	}
 }
@@ -124,6 +126,7 @@ header nav {
 		.center-page()
 	}
 	ul,
+	ul li a,
 	ul li a:link {
 		margin:0;
 		padding:0;
@@ -131,6 +134,7 @@ header nav {
 		background-color: @menu-bg;
 		height:30px;
 	}
+	ul li a,
 	ul li a:link {
 		padding-top:15px;
 		padding-left:10px;
